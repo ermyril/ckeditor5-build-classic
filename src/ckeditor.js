@@ -28,6 +28,7 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -54,7 +55,8 @@ ClassicEditor.builtinPlugins = [
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableToolbar
+	TableToolbar,
+	HorizontalLine,
 ];
 
 // Editor configuration.
@@ -69,15 +71,36 @@ ClassicEditor.defaultConfig = {
 			'bulletedList',
 			'numberedList',
 			'|',
-			'indent',
-			'outdent',
-			'|',
-			'imageUpload',
+			//  'indent',
+			//  'outdent',
+			//  '|',
+			//  'imageUpload',
 			'blockQuote',
 			'insertTable',
-			'mediaEmbed',
+			//  'mediaEmbed',
+			'horizontalLine',
 			'undo',
-			'redo'
+			'redo',
+		],
+	},
+	heading: {
+		options: [
+			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+			{ model: 'heading1', view: 'h2', title: 'Heading 1', class: 'ck-heading_heading1' },
+			{ model: 'heading2', view: 'h3', title: 'Heading 2', class: 'ck-heading_heading2' },
+			{ model: 'heading3', view: 'h4', title: 'Heading 3', class: 'ck-heading_heading3' },
+			{
+				model: 'BlockQuote',
+				view: {
+					name: 'blockquote',
+					classes: 'notation'
+				},
+				title: 'Notation',
+				class: 'ck-heading_notation_blockquote',
+
+				// It needs to be converted before the standard 'heading2'.
+				converterPriority: 'high'
+			}
 		]
 	},
 	image: {
